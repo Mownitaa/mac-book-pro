@@ -44,9 +44,10 @@ addCostValues('paid-delivery-btn', 'delivery-cost', paidDeliveryCost);
 document.getElementById('apply-btn').addEventListener('click', function () {
     const inputValue = document.getElementById('input-field').value;
     if (inputValue == 'stevekaku') {
-        const totalValue = document.getElementById('total');
+        const totalValue = document.getElementById('total-price');
         const totalNum = totalValue.innerText;
-        totalValue.innerText = totalNum - (totalNum * 0.2);
+        discountedPrice = document.getElementById('total');
+        discountedPrice.innerText = totalNum - (totalNum * 0.2);
     }
     document.getElementById('input-field').value = '';
 })
