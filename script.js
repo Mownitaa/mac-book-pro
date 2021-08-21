@@ -1,77 +1,47 @@
-
-// setting the value for each options of memory,storage and delivery process
-function addZero(value) {
-    const cost = document.getElementById(value + '-cost');
-    cost.innerText = 0;
+function getInputValue(options) {
+    const inputId = document.getElementById(options);
+    const inputValue = inputId.innerText;
+    const inputCost = parseInt(inputValue);
+    return inputCost;
+};
+function addInputValues(button, calc, cost) {
+    document.getElementById(button).addEventListener('click', function () {
+        const calcValue = document.getElementById(calc);
+        calcValue.innerText = cost;
+        const basePrice = getInputValue('best-price');
+        const memoryCost = getInputValue('memory-cost');
+        const storageCost = getInputValue('storage-cost');
+        const deliveryCost = getInputValue('delivery-cost');
+        const totalPrice = document.getElementById('total-price')
+        const total = document.getElementById('total')
+        totalPrice.innerText = basePrice + memoryCost + storageCost + deliveryCost;
+        total.innerText = totalPrice.innerText;
+    });
 }
-function add180(value) {
-    const cost = document.getElementById(value + '-cost');
-    cost.innerText = 180;
-}
-// function add(price) {
-//     const addWithTotal = document.getElementById('total-price');
-//     addWithTotal.innerText = 1299 + price;
-// }
-// function addTotal(num) {
-//     const addWithTotalP = document.getElementById('total');
-//     addWithTotalP.innerText = 1299 + num;
-// }
-document.getElementById('8gb-btn').addEventListener('click', function () {
-    addZero('memory');
-    // add(0);
-    // addTotal(0);
-});
-document.getElementById('16gb-btn').addEventListener('click', function () {
-    add180('memory');
-    // add(180);
-    // addTotal(180);
-});
-document.getElementById('256gb-ssd-btn').addEventListener('click', function () {
-    addZero('storage');
-    // add(0);
-    // addTotal(0);
-});
-document.getElementById('512gb-ssd-btn').addEventListener('click', function () {
-    const memoryCost = document.getElementById('storage-cost');
-    memoryCost.innerText = 100;
-    // add(100);
-    // addTotal(100);
-});
-document.getElementById('1tb-ssd-btn').addEventListener('click', function () {
-    add180('storage');
-    // add(180);
-    // addTotal(180);
-});
-document.getElementById('free-delivery-btn').addEventListener('click', function () {
-    addZero('delivery');
-    // add(0);
-    // addTotal(0);
-});
-document.getElementById('paid-delivery-btn').addEventListener('click', function () {
-    const memoryCost = document.getElementById('delivery-cost');
-    memoryCost.innerText = 20;
-    // add(20);
-    // addTotal(20);
-});
-
-
-
-document.getElementById('options').addEventListener('click', function (event) {
-    // console.log('any key clicked');
-    console.log(event.target.value);
-    // const calcInput = document.getElementById('total-price');
-    // const previousNum = calcInput.value;
-    // const newNumber = 1299 + paeseInt(previousNum) + parseInt(option);
-    // calcInput.value = newNumber;
+const memoryCostFor8gb = 0;
+const memoryCostFor16gb = 180;
+const storageCostFor256gb = 0;
+const storageCostFor512gb = 100;
+const storageCostFor1tb = 180;
+const freeDeliveryCost = 0;
+const paidDeliveryCost = 20;
+addInputValues('8gb-btn', 'memory-cost', memoryCostFor8gb);
+addInputValues('16gb-btn', 'memory-cost', memoryCostFor16gb);
+addInputValues('256gb-ssd-btn', 'storage-cost', storageCostFor256gb);
+addInputValues('512gb-ssd-btn', 'storage-cost', storageCostFor512gb);
+addInputValues('1tb-ssd-btn', 'storage-cost', storageCostFor1tb);
+addInputValues('free-delivery-btn', 'delivery-cost', freeDeliveryCost);
+addInputValues('paid-delivery-btn', 'delivery-cost', paidDeliveryCost);
+//set coupon code and give conditions for getting discount
+document.getElementById('apply-btn').addEventListener('click', function () {
+    const inputValue = document.getElementById('input-field').value;
+    if (inputValue == 'stevekaku') {
+        const totalValue = document.getElementById('total');
+        const totalNum = totalValue.innerText;
+        totalValue.innerText = totalNum - (totalNum * 0.2);
+        // if (totalValue.innerText <= 1299) {
+        //     document.getElementById('apply-btn').disabled = true;
+        // }
+    }
+    document.getElementById('input-field').value = '';
 })
-
-// document.getElementById('apply-btn').addEventListener('click', function () {
-
-    // const inputValue = document.getElementById('input-field').value;
-    // console.log(inputValue);
-    // // if (inputValue == 'stevekaku') {
-    // //     const totalPriceValue = document.getElementById('total').innerText - 0.2;
-    // //     return totalPriceValue;
-    // // }
-    // inputValue = '';
-// })
